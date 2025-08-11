@@ -1,5 +1,4 @@
-import streamlit as st
-import pandas as pd
-import plotly.express as px
-from PIL import Image
-import os
+streamlit
+pandas
+plotly
+Pillow
