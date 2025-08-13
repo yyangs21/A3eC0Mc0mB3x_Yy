@@ -223,7 +223,7 @@ def cargar_logo_url(url):
         return None
 
 # Mostrar logo
-url_logo_default = "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Asecom.png"
+url_logo_default = "https://github.com/yyangs21/A3eC0Mc0mB3x_Yy/blob/master/Asecom.png"
 logo_asecom = cargar_logo_url(url_logo_default)
 if logo_asecom:
     st.image(logo_asecom, width=720, caption="UNIDADES ASECOM")
