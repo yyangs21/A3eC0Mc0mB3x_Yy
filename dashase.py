@@ -210,18 +210,20 @@ def plotly_config_theme(fig):
 
 
 # --- Ruta base donde están los logos ---
-ruta_logos = "https://github.com/yyangs21/A3eC0Mc0mB3x_Yy/blob/master"
+ruta_logos = r"C:\Users\yyang\Downloads"
 
-def cargar_logo(nombre_archivo):
-    ruta = os.path.join(ruta_logos, nombre_archivo)
+def cargar_logo_url(url):
     try:
-        return Image.open(ruta)
+        response = requests.get(url)
+        response.raise_for_status()
+        return Image.open(BytesIO(response.content))
     except Exception as e:
-        st.warning(f"No se pudo cargar la imagen {nombre_archivo}: {e}")
+        st.warning(f"No se pudo cargar la imagen desde {url}: {e}")
         return None
 
 # Mostrar logo
-logo_asecom = cargar_logo("Asecom.png")
+url_logo_default = "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Asecom.png"
+logo_asecom = cargar_logo_url(url_logo_default)
 if logo_asecom:
     st.image(logo_asecom, width=720, caption="UNIDADES ASECOM")
 
@@ -330,24 +332,23 @@ filtros = {
     "UNIDAD": filtro_multiselect("UNIDAD", "UNIDAD"),
 }
 # --- Logos dinámicos según UNIDAD filtrada ---
-if filtros["UNIDAD"] and len(filtros["UNIDAD"]) == 1:
+unidad_sel = None
+if filtros.get("UNIDAD") and len(filtros["UNIDAD"]) == 1:
     unidad_sel = filtros["UNIDAD"][0].upper()
-
-    # Mapear nombre de unidad a archivo de logo
-    logos_unidades = {
-        "GO CAFE": "Cafe Go.png",
-        "CAFETERIA": "Cafeteria.png",
-        "PIZZA GO": "Pizza Go.png"
+    # Mapear nombre de unidad a URL de logo en GitHub/Streamlit Cloud
+    logos_unidades_url = {
+        "GO CAFE": "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Cafe%20Go.png",
+        "CAFETERIA": "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Cafeteria.png",
+        "PIZZA GO": "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Pizza%20Go.png"
     }
-
-    archivo_logo = logos_unidades.get(unidad_sel, "Asecom.png")
+    url_logo = logos_unidades_url.get(unidad_sel, "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Asecom.png")
 else:
-    archivo_logo = "Asecom2.png"  # logo por defecto
+    url_logo = "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Asecom2.png"  # logo por defecto
 
-# Cargar y mostrar logo
-logo_img = cargar_logo(archivo_logo)
+# --- Cargar y mostrar logo filtrado ---
+logo_img = cargar_logo_url(url_logo)
 if logo_img:
-    st.image(logo_img, width=350, caption=f"Logo {unidad_sel}" if filtros["UNIDAD"] else "UNIDADES ASECOM")
+    st.image(logo_img, width=350, caption=f"Logo {unidad_sel}" if unidad_sel else "UNIDADES ASECOM")
 
 
 # Aplicar filtros
