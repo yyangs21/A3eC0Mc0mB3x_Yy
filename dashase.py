@@ -211,7 +211,7 @@ def plotly_config_theme(fig):
 
 
 # --- Ruta base donde están los logos ---
-ruta_logos = r"C:\Users\yyang\Downloads"
+
 
 def cargar_logo_url(url):
     try:
