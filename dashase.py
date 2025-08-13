@@ -77,7 +77,7 @@ h1, h3, h4, h5 {
 }
 
 /* Textos de labels y filtros en sidebar */
-[data-testid="stSidebar"] label,https://github.com/yyangs21/A3eC0Mc0mB3x_Yy/blob/master/dashase.py#L213C0-L213C40
+[data-testid="stSidebar"] label,
 [data-testid="stSidebar"] .stSelectbox label,
 [data-testid="stSidebar"] .stMultiselect label,
 [data-testid="stSidebar"] .stRadio label,
@@ -210,30 +210,25 @@ def plotly_config_theme(fig):
 
 
 # --- Ruta base donde están los logos ---
+logo_asecom = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Asecom.png"
+logo_asecom2 = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Asecom2.png"
+logo_cafe = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Cafe%20Go.png"
+logo_cafeteria = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Cafeteria.png"
+logo_pizza = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Pizza%20Go.png"
+
 
 def cargar_logo(nombre_archivo):
-    """
-    Carga un logo desde tu repositorio público de GitHub.
-    - nombre_archivo: nombre del archivo del logo, por ejemplo "Asecom.png"
-    """
-    # URL base de tu repo público en GitHub
-    base_url = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom"
-    url_completa = f"{base_url}/{nombre_archivo}"
-    
+    ruta = os.path.join(ruta_logos, nombre_archivo)
     try:
-        response = requests.get(url_completa)
-        response.raise_for_status()  # Lanza error si falla la descarga
-        return Image.open(BytesIO(response.content))
+        return Image.open(ruta)
     except Exception as e:
-        st.error(f"No se pudo cargar el logo '{nombre_archivo}': {e}")
+        st.warning(f"No se pudo cargar la imagen {nombre_archivo}: {e}")
         return None
-# Mostrar logo
-logos = ["Asecom.png", "Asecom2.png", "Cafe Go.png", "Pizza Go.png"]
 
-for logo_nombre in logos:
-    logo_img = cargar_logo(logo_nombre)
-    if logo_img:
-        st.image(logo_img, width=720, caption=logo_nombre)
+# Mostrar logo
+logo_asecom = cargar_logo("Asecom.png")
+if logo_asecom:
+    st.image(logo_asecom, width=720, caption="UNIDADES ASECOM")
 
 
 
