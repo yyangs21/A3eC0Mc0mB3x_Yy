@@ -212,18 +212,28 @@ def plotly_config_theme(fig):
 # --- Ruta base donde están los logos ---
 
 def cargar_logo(nombre_archivo):
-    ruta_base = os.path.dirname(__file__)
-    ruta_logo = os.path.join(ruta_base, "Asecom", nombre_archivo)
+    """
+    Carga un logo desde tu repositorio público de GitHub.
+    - nombre_archivo: nombre del archivo del logo, por ejemplo "Asecom.png"
+    """
+    # URL base de tu repo público en GitHub
+    base_url = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom"
+    url_completa = f"{base_url}/{nombre_archivo}"
+    
     try:
-        return Image.open(ruta_logo)
+        response = requests.get(url_completa)
+        response.raise_for_status()  # Lanza error si falla la descarga
+        return Image.open(BytesIO(response.content))
     except Exception as e:
         st.error(f"No se pudo cargar el logo '{nombre_archivo}': {e}")
         return None
-
 # Mostrar logo
-logo_asecom = cargar_logo("Asecom.png")
-if logo_asecom:
-    st.image(logo_asecom, width=720, caption="UNIDADES ASECOM")
+logos = ["Asecom.png", "Asecom2.png", "Cafe Go.png", "Pizza Go.png"]
+
+for logo_nombre in logos:
+    logo_img = cargar_logo(logo_nombre)
+    if logo_img:
+        st.image(logo_img, width=720, caption=logo_nombre)
 
 
 
