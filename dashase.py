@@ -77,7 +77,7 @@ h1, h3, h4, h5 {
 }
 
 /* Textos de labels y filtros en sidebar */
-[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] label,https://github.com/yyangs21/A3eC0Mc0mB3x_Yy/blob/master/dashase.py#L213C0-L213C40
 [data-testid="stSidebar"] .stSelectbox label,
 [data-testid="stSidebar"] .stMultiselect label,
 [data-testid="stSidebar"] .stRadio label,
@@ -210,7 +210,6 @@ def plotly_config_theme(fig):
 
 
 # --- Ruta base donde están los logos ---
-ruta_logos = r"C:\Users\yyang\Downloads"
 
 def cargar_logo(nombre_archivo):
     ruta = os.path.join(ruta_logos, nombre_archivo)
