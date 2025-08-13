@@ -7,6 +7,7 @@ from datetime import datetime
 import numpy as np
 from streamlit_option_menu import option_menu
 import requests
+from io import BytesIO
 
 # ML imports
 from prophet import Prophet
