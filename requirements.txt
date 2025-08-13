@@ -2,4 +2,7 @@ streamlit
 pandas
 plotly
 Pillow
-openpyxl
+numpy
+prophet
+xgboost
+scikit-learn
