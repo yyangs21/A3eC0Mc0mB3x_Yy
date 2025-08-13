@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 import numpy as np
 from streamlit_option_menu import option_menu
+import requests
 
 # ML imports
 from prophet import Prophet
