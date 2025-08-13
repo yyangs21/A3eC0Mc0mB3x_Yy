@@ -339,13 +339,13 @@ if filtros.get("UNIDAD") and len(filtros["UNIDAD"]) == 1:
     unidad_sel = filtros["UNIDAD"][0].upper()
     # Mapear nombre de unidad a URL de logo en GitHub/Streamlit Cloud
     logos_unidades_url = {
-        "GO CAFE": "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Cafe%20Go.png",
-        "CAFETERIA": "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Cafeteria.png",
-        "PIZZA GO": "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Pizza%20Go.png"
+        "GO CAFE": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Cafe%20Go.png",
+        "CAFETERIA": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Cafeteria.png",
+        "PIZZA GO": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Pizza%20Go.png"
     }
-    url_logo = logos_unidades_url.get(unidad_sel, "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Asecom.png")
+    url_logo = logos_unidades_url.get(unidad_sel, "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom.png")
 else:
-    url_logo = "https://raw.githubusercontent.com/tu_usuario/tu_repo/master/Asecom2.png"  # logo por defecto
+    url_logo = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom2.png"  # logo por defecto
 
 # --- Cargar y mostrar logo filtrado ---
 logo_img = cargar_logo_url(url_logo)
