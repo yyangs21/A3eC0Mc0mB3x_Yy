@@ -212,11 +212,12 @@ def plotly_config_theme(fig):
 # --- Ruta base donde están los logos ---
 
 def cargar_logo(nombre_archivo):
-    ruta = os.path.join(ruta_logos, nombre_archivo)
+    ruta_base = os.path.dirname(__file__)
+    ruta_logo = os.path.join(ruta_base, "Asecom", nombre_archivo)
     try:
-        return Image.open(ruta)
+        return Image.open(ruta_logo)
     except Exception as e:
-        st.warning(f"No se pudo cargar la imagen {nombre_archivo}: {e}")
+        st.error(f"No se pudo cargar el logo '{nombre_archivo}': {e}")
         return None
 
 # Mostrar logo
