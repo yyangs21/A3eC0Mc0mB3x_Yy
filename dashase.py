@@ -210,7 +210,7 @@ def plotly_config_theme(fig):
 
 
 # --- Ruta base donde están los logos ---
-ruta_logos = r"https://github.com/yyangs21/A3eC0Mc0mB3x_Yy.git"
+ruta_logos = "https://github.com/yyangs21/A3eC0Mc0mB3x_Yy.git"
 
 def cargar_logo(nombre_archivo):
     ruta = os.path.join(ruta_logos, nombre_archivo)
