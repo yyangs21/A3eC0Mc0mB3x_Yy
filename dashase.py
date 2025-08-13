@@ -210,12 +210,7 @@ def plotly_config_theme(fig):
 
 
 # --- Ruta base donde están los logos ---
-logo_asecom = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Asecom.png"
-logo_asecom2 = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Asecom2.png"
-logo_cafe = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Cafe%20Go.png"
-logo_cafeteria = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Cafeteria.png"
-logo_pizza = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Y/master/Pizza%20Go.png"
-
+ruta_logos = r"https://github.com/yyangs21/A3eC0Mc0mB3x_Yy.git"
 
 def cargar_logo(nombre_archivo):
     ruta = os.path.join(ruta_logos, nombre_archivo)
