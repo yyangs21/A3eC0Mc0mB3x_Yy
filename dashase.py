@@ -113,7 +113,7 @@ def _convertir_img_base64(img):
 
 def _render_hero_con_logo():
     # Ruta del logo en Downloads
-    logo_path = os.path.expanduser(r"~\Downloads\Asecom.png")
+    logo_path = os.path.expanduser(r"https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom.png")
 
     # Intentar cargar el logo
     try:
@@ -265,23 +265,15 @@ def plotly_config_theme(fig, dark_mode=False):
                     labels = labels.tolist()
                 tr.update(textposition='inside', textinfo='percent+label', hole=0.36, pull=[0.02]*len(labels))
 
-logos_unidades_url = {
-    "GO CAFE": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Cafe%20Go.png",
-    "CAFETERIA": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Cafeteria.png",
-    "PIZZA GO": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Pizza%20Go.png",
-}
-def cargar_logo_url(url):
-    import requests
-    from io import BytesIO
+ruta_logos = r"https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master"
+
+def cargar_logo(nombre_archivo):
+    ruta = os.path.join(ruta_logos, nombre_archivo)
     try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return Image.open(BytesIO(response.content))
+        return Image.open(ruta)
     except Exception as e:
-        st.warning(f"No se pudo cargar la imagen desde {url}: {e}")
+        st.warning(f"No se pudo cargar la imagen {nombre_archivo}: {e}")
         return None
-
-
 
 st.markdown("# 📊 Data 2023-ACTUALIDAD")
 
@@ -746,4 +738,5 @@ try:
     """, unsafe_allow_html=True)
 except Exception:
     pass
+
 
