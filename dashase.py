@@ -15,6 +15,23 @@ import xgboost as xgb
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 st.set_page_config(page_title="Dashboard Ventas Interactivo", layout="wide")
+logos_unidades_url = {
+    "GO CAFE": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Cafe%20Go.png",
+    "CAFETERIA": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Cafeteria.png",
+    "PIZZA GO": "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Pizza%20Go.png"
+}
+
+# Puedes usar unidad_sel desde filtros si ya está definida, aquí ejemplo fijo:
+unidad_sel = "GO CAFE"
+url_logo = logos_unidades_url.get(unidad_sel)
+
+if url_logo:
+    st.markdown(f"""
+        <div style='text-align:center;'>
+            <img src='{url_logo}' width='350'>
+            <h2 style='margin-top:10px;'>🧭 Dashboard ASECOM</h2>
+        </div>
+    """, unsafe_allow_html=True)
 
 # ====== PREMIUM THEME (Auto-injected) ======
 custom_css = """
