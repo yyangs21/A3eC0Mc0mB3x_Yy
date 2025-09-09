@@ -6,7 +6,7 @@ numpy
 prophet
 xgboost
 scikit-learn
-streamlit_option_menu
+streamlit-option-menu
 openpyxl
 requests
 
