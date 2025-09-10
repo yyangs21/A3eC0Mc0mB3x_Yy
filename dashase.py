@@ -111,51 +111,76 @@ def _convertir_img_base64(img):
     return base64.b64encode(buf.getvalue()).decode()
 
 
+
+import os
+import streamlit as st
+from pathlib import Path
+from PIL import Image
+import base64
+import requests
+from io import BytesIO
+
+def _convertir_img_base64(img: Image.Image) -> str:
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    return base64.b64encode(buffered.getvalue()).decode()
+
 def _render_hero_con_logo():
-    # Ruta del logo en Downloads
-    logo_path = os.path.expanduser(r"https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom.png")
+    logo_img = None
 
-    # Intentar cargar el logo
-    try:
-        logo_img = Image.open(logo_path)
-    except Exception:
-        logo_img = None
+    # 1) Intentar cargar desde carpeta del repo (ruta relativa)
+    local_path = Path("images/Asecom/Asecom.png")
+    if local_path.exists():
+        try:
+            logo_img = Image.open(local_path)
+        except Exception as e:
+            st.warning(f"No se pudo abrir el logo local: {e}")
 
-    logo_html = (
-        f'<img src="data:image/png;base64,{_convertir_img_base64(logo_img)}" style="height:162px;"/>'
-        if logo_img else ""
-    )
+    # 2) Si no existe local, intentar desde GitHub raw URL
+    if logo_img is None:
+        raw_url = ("https://raw.githubusercontent.com/"
+                   "yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom/Asecom.png")
+        try:
+            resp = requests.get(raw_url, timeout=10)
+            if resp.status_code == 200:
+                logo_img = Image.open(BytesIO(resp.content))
+            else:
+                st.warning("Logo no disponible desde URL raw (status code != 200)")
+        except Exception as e:
+            st.warning(f"Error al descargar logo desde GitHub: {e}")
 
-    # Encabezado principal con diseño tipo hero (HTML real + clase para forzar blanco)
+    # 3) Convertir a base64 e insertar en HTML (si hay imagen)
+    logo_html = ""
+    if logo_img:
+        try:
+            logo_b64 = _convertir_img_base64(logo_img)
+            logo_html = (
+                f'<img src="data:image/png;base64,{logo_b64}" '
+                f'style="height:100px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.3);" />'
+            )
+        except Exception as e:
+            st.error(f"Error al convertir logo a base64: {e}")
+
+    # 4) Renderizar el hero con o sin imagen
     st.markdown(
         f"""
-        <div class="hero asecom-hero" style="
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: linear-gradient(
-                120deg, 
-                #0a1856 0%, 
-                #1b2a7c 50%, 
-                #0a1856 70%, 
-                #ffffff 70%, 
-                #ffffff 100%
-            );
-            padding: 18px 28px;
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(120deg,#0a1856 0%,#1b2a7c 50%,#0a1856 100%);
+            padding: 20px 28px;
             border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 4px 8px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            color: white;
         ">
             <div>
-                <h1 style="margin:0; font-size:45px;">📊 Dashboard ASECOM</h1>
-                <h2 style="margin:0; font-size:18px;">• Visualización Corporativa</h2>
+                <h1 style="margin:0; font-size:40px;">📊 Dashboard ASECOM</h1>
+                <p style="margin:0; font-size:18px;">Ventas 2023 – 2025 • Visualización Corporativa</p>
             </div>
-            <div style="text-align:right;">
-                {logo_html}
-                <div style="font-weight:bold; margin-top:10px; font-size:36px;"></div>
-            </div>
+            <div>{logo_html}</div>
         </div>
-        """,
+        """ ,
         unsafe_allow_html=True
     )
 
@@ -738,7 +763,6 @@ try:
     """, unsafe_allow_html=True)
 except Exception:
     pass
-
 
 
 
