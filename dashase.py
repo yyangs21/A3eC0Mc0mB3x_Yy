@@ -136,16 +136,16 @@ def _render_hero_con_logo():
         except Exception as e:
             st.warning(f"No se pudo abrir el logo local: {e}")
 
+    
     # 2) Si no existe local, intentar desde GitHub raw URL
-   if logo_img is None:
-    raw_url = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom.png"
+    if logo_img is None:
+        raw_url = "https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom.png"
         try:
             resp = requests.get(raw_url, timeout=10)
-            resp.raise_for_status()  # lanza excepción si falla
+            resp.raise_for_status()  # lanza excepción si no es 200
             logo_img = Image.open(BytesIO(resp.content))
         except Exception as e:
             st.warning(f"⚠️ No se pudo descargar logo desde GitHub: {e}")
-  
 
     # 3) Convertir a base64 e insertar en HTML (si hay imagen)
     logo_html = ""
@@ -761,5 +761,4 @@ try:
     """, unsafe_allow_html=True)
 except Exception:
     pass
-
 
