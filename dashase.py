@@ -138,8 +138,7 @@ def _render_hero_con_logo():
 
     # 2) Si no existe local, intentar desde GitHub raw URL
     if logo_img is None:
-        raw_url = ("https://raw.githubusercontent.com/"
-                   "yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom/Asecom.png")
+        raw_url = ("https://raw.githubusercontent.com/yyangs21/A3eC0Mc0mB3x_Yy/master/Asecom.png)
         try:
             resp = requests.get(raw_url, timeout=10)
             if resp.status_code == 200:
